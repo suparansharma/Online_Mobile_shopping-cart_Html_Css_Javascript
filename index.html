@@ -16,7 +16,7 @@
       <div class="container">
          <div class="cart">
             <div class="col-md-12 col-lg-10 mx-auto">
-               <div class="cart-item">
+               <div class="cart-item" id="Mobile-area">
                   <div class="row">
                      <div class="col-md-7 center-item">
                         <img src="images/product-1.png" alt="">
@@ -26,16 +26,16 @@
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
                            <button class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input type="text" class="form-control text-center" value="1">
-                           <button class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <input type="text" class="form-control text-center" id="numberOfMobile" value="1">
+                           <button onClick=add class="btn btn-default" id="addMobile"><i class="fas fa-plus"></i></button>
                         </div>
                         <h5>$1219</h5>
-                        <img src="images/remove.png" alt="" class="remove-item">
+                        <img src="images/remove.png" alt="" class="remove-item" id="img-cross-1">
                      </div>
                   </div>
                </div>
 
-               <div class="cart-item">
+               <div class="cart-item " id="Case-area">
                   <div class="row">
                      <div class="col-md-7 center-item mx-auto">
                         <img src="images/product-2.png" alt="">
@@ -49,7 +49,7 @@
 
                         </div>
                         <h5>$59</h5>
-                        <img src="images/remove.png" alt="" class="remove-item">
+                        <img src="images/remove.png" alt="" class="remove-item" id="img-cross-2">
                      </div>
                   </div>
                </div>
@@ -78,5 +78,38 @@
       </div>
    </section>
 </body>
+
+<script>
+// mobile area cross image button even handler
+const img_cross_1 = document.getElementById("img-cross-1");
+img_cross_1.addEventListener("click",function(){
+            const MobileArea = document.getElementById("Mobile-area");
+            MobileArea.style.display = "none";})
+
+
+            const img_cross_2 = document.getElementById("img-cross-2");
+img_cross_2.addEventListener("click",function(){
+            const CaseArea = document.getElementById("Case-area");
+            CaseArea.style.display = "none";})
+
+
+
+            //+ mobile number
+
+            var plusAddMobileBtn = document.getElementById("addMobile");
+            plusAddMobileBtn.addEventListener("click",function(){
+
+               // plusAddMobileBtn.value = parseInt(plusAddMobileBtn.value);
+               // console.log("licked ok");
+               adMobile();
+
+            })
+            
+            function adMobile(){
+
+               console.log("licked ok")
+            }
+
+</script>
 
 </html>
