@@ -29,7 +29,7 @@
                            <input type="text" class="form-control text-center" id="numberOfMobile" value="1">
                            <button onClick=add class="btn btn-default" id="addMobile"><i class="fas fa-plus"></i></button>
                         </div>
-                        <h5>$1219</h5>
+                        <h5>$<span id="mobilePrice">1219</span></h5>
                         <img src="images/remove.png" alt="" class="remove-item" id="img-cross-1">
                      </div>
                   </div>
@@ -101,14 +101,24 @@ img_cross_2.addEventListener("click",function(){
 
                // plusAddMobileBtn.value = parseInt(plusAddMobileBtn.value);
                // console.log("licked ok");
-               adMobile();
+               adMobileNumber("numberOfMobile","mobilePrice");
 
             })
             
-            function adMobile(){
+            function adMobileNumber(){
 
-               console.log("licked ok")
+               var item = document.getElementById("numberOfMobile").value;
+              item++;
+              document.getElementById("numberOfMobile").value = item;
+
+              var price = document.getElementById("mobilePrice").innerText;
+               var itemPrice = parseFloat(price);
+              var totalMobilePrice = item * itemPrice;
+              document.getElementById("mobilePrice").innerText = totalMobilePrice;
             }
+
+
+            
 
 </script>
 
