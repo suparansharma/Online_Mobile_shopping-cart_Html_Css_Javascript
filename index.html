@@ -25,9 +25,9 @@
 
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <button class="btn btn-default" id="subtracMobile"><i class="fas fa-minus"></i></button>
                            <input type="text" class="form-control text-center" id="numberOfMobile" value="1">
-                           <button onClick=add class="btn btn-default" id="addMobile"><i class="fas fa-plus"></i></button>
+                           <button class="btn btn-default" id="addMobile"><i class="fas fa-plus"></i></button>
                         </div>
                         <h5>$<span id="mobilePrice">1219</span></h5>
                         <img src="images/remove.png" alt="" class="remove-item" id="img-cross-1">
@@ -44,11 +44,11 @@
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
                            <button class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input type="text" class="form-control text-center" value="1">
-                           <button class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <input type="text" class="form-control text-center" id="numberOfMobileCase" value="1">
+                           <button class="btn btn-default" id="addMobileCase"><i class="fas fa-plus"></i></button>
 
                         </div>
-                        <h5>$59</h5>
+                        <h5>$<span id="mobileCasePrice">59</span></h5>
                         <img src="images/remove.png" alt="" class="remove-item" id="img-cross-2">
                      </div>
                   </div>
@@ -80,45 +80,86 @@
 </body>
 
 <script>
-// mobile area cross image button even handler
-const img_cross_1 = document.getElementById("img-cross-1");
-img_cross_1.addEventListener("click",function(){
-            const MobileArea = document.getElementById("Mobile-area");
-            MobileArea.style.display = "none";})
+   // mobile area cross image button even handler
+   const img_cross_1 = document.getElementById("img-cross-1");
+   img_cross_1.addEventListener("click", function () {
+      const MobileArea = document.getElementById("Mobile-area");
+      MobileArea.style.display = "none";
+   })
 
 
-            const img_cross_2 = document.getElementById("img-cross-2");
-img_cross_2.addEventListener("click",function(){
-            const CaseArea = document.getElementById("Case-area");
-            CaseArea.style.display = "none";})
+   const img_cross_2 = document.getElementById("img-cross-2");
+   img_cross_2.addEventListener("click", function () {
+      const CaseArea = document.getElementById("Case-area");
+      CaseArea.style.display = "none";
+   })
 
 
 
-            //+ mobile number
+   //+ mobile number
 
-            var plusAddMobileBtn = document.getElementById("addMobile");
-            plusAddMobileBtn.addEventListener("click",function(){
+   var plusAddMobileBtn = document.getElementById("addMobile");
+   plusAddMobileBtn.addEventListener("click", function () {
 
-               // plusAddMobileBtn.value = parseInt(plusAddMobileBtn.value);
-               // console.log("licked ok");
-               adMobileNumber("numberOfMobile","mobilePrice");
+      // plusAddMobileBtn.value = parseInt(plusAddMobileBtn.value);
+      // console.log("licked ok");
+      //adMobileNumber("numberOfMobile","mobilePrice");
 
-            })
-            
-            function adMobileNumber(){
+      var mobileItem = document.getElementById("numberOfMobile").value;
+      mobileItem++;
+      document.getElementById("numberOfMobile").value = mobileItem;
 
-               var item = document.getElementById("numberOfMobile").value;
-              item++;
-              document.getElementById("numberOfMobile").value = item;
+      var mPrice = document.getElementById("mobilePrice").innerText;
+      var MobileItemPrice = parseFloat(mPrice);
+      var totalMobilePrice = mobileItem * MobileItemPrice;
+      document.getElementById("mobilePrice").innerText = totalMobilePrice;
 
-              var price = document.getElementById("mobilePrice").innerText;
-               var itemPrice = parseFloat(price);
-              var totalMobilePrice = item * itemPrice;
-              document.getElementById("mobilePrice").innerText = totalMobilePrice;
-            }
+   })
 
 
-            
+
+
+
+   var minussubtracMobileBtn = document.getElementById("subtracMobile");
+   minussubtracMobileBtn.addEventListener("click", function () {
+
+
+
+      var item = document.getElementById("numberOfMobile").value;
+      item--;
+      document.getElementById("numberOfMobile").value = item;
+
+      totalMobilePrice = totalMobilePrice - 1219;
+
+
+   })
+
+
+
+
+
+   var plusAddMobileCaseBtn = document.getElementById("addMobileCase");
+   plusAddMobileCaseBtn.addEventListener("click", function () {
+
+
+
+
+      var caseItem = document.getElementById("numberOfMobileCase").value;
+      caseItem++;
+      document.getElementById("numberOfMobileCase").value = caseItem;
+
+      var cprice = document.getElementById("mobileCasePrice").innerText;
+      var caseItemPrice = parseFloat(cprice);
+      var totalCasePrice = caseItem * caseItemPrice;
+      document.getElementById("mobileCasePrice").innerText = totalCasePrice;
+
+   })
+
+
+
+
+
+
 
 </script>
 
