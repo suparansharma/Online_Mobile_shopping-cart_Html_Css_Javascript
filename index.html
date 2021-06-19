@@ -65,7 +65,7 @@
 
                      <div class="col-md-4 status">
                         <h5>$ <span id="subtotal" >1,278</span></h5>
-                        <h5>$0</h5>
+                        <h5><span id="addtax" >0</span></h5>
                         <h5>$1,278</h5>
                      </div>
                   </div>
@@ -115,6 +115,7 @@
       document.getElementById("mobilePrice").innerText = totalMobilePrice;
 
       subTotal();
+      Tax();
 
    })
 
@@ -155,6 +156,7 @@
       var totalCasePrice = caseItem * caseItemPrice;
       document.getElementById("mobileCasePrice").innerText = totalCasePrice;
       subTotal();
+      Tax();
 
    })
 
@@ -169,6 +171,20 @@
 
 
    
+   }
+
+   function Tax(){
+
+
+   
+      var SubTotalMobilePrice = document.getElementById("mobilePrice").innerText;
+      var SubTotalMobileCasePrice = document.getElementById("mobileCasePrice").innerText;
+
+      var tax = parseFloat(SubTotalMobilePrice)  + parseFloat(SubTotalMobileCasePrice) -  parseFloat(SubTotalMobilePrice)  + parseFloat(SubTotalMobileCasePrice) *.15;
+      document.getElementById("addtax").innerText = tax;
+
+
+
    }
 
 
