@@ -2,7 +2,7 @@
 <html>
 
 <head>
-   <title>Shopping Cart</title>
+   <title>Online Mobile Shop</title>
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -43,7 +43,7 @@
                      </div>
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <button class="btn btn-default" id="removeMobileCase"><i class="fas fa-minus"></i></button>
                            <input type="text" class="form-control text-center" id="numberOfMobileCase" value="1">
                            <button class="btn btn-default" id="addMobileCase"><i class="fas fa-plus"></i></button>
 
@@ -64,7 +64,7 @@
                      </div>
 
                      <div class="col-md-4 status">
-                        <h5>$ <span id="subtotal" >1,278</span></h5>
+                        <h5>$ <span id="subtotal">1,278</span></h5>
                         <h5><span id="addtax">0</span></h5>
                         <h5><span id="total">0</span></h5>
                      </div>
@@ -101,49 +101,23 @@
    var plusAddMobileBtn = document.getElementById("addMobile");
    plusAddMobileBtn.addEventListener("click", function () {
 
-      // plusAddMobileBtn.value = parseInt(plusAddMobileBtn.value);
-      // console.log("licked ok");
-      //adMobileNumber("numberOfMobile","mobilePrice");
+      addItem("numberOfMobile", "mobilePrice");
 
-      var mobileItem = document.getElementById("numberOfMobile").value;
-      mobileItem++;
-      document.getElementById("numberOfMobile").value = mobileItem;
 
-      var mPrice = document.getElementById("mobilePrice").innerText;
-      var MobileItemPrice = parseFloat(mPrice);
-      var totalMobilePrice = mobileItem * MobileItemPrice;
-      document.getElementById("mobilePrice").innerText = totalMobilePrice;
 
-      subTotal();
-      Tax();
-      Total();
 
    })
 
 
 
+   var minusRemoveMobileBtn = document.getElementById("removeMobile");
+   minusRemoveMobileBtn.addEventListener("click", function () {
 
-
-   var minussubtracMobileBtn = document.getElementById("removeMobile");
-   minussubtracMobileBtn.addEventListener("click", function () {
-
-
-
-      var mobileItem = document.getElementById("numberOfMobile").value;
-      mobileItem--;
-      document.getElementById("numberOfMobile").value = mobileItem;
-
-      var mPrice = document.getElementById("mobilePrice").innerText;
-      var MobileItemPrice = parseFloat(mPrice);
-      var totalMobilePrice = mobileItem * MobileItemPrice;
-      document.getElementById("mobilePrice").innerText = totalMobilePrice;
-
-      subTotal();
-      Tax();
-      Total();
+      removeItem("numberOfMobile", "mobilePrice");
 
 
    })
+
 
 
 
@@ -153,59 +127,111 @@
    plusAddMobileCaseBtn.addEventListener("click", function () {
 
 
+      addItem("numberOfMobileCase", "mobileCasePrice");
 
 
-      var caseItem = document.getElementById("numberOfMobileCase").value;
-      caseItem++;
-      document.getElementById("numberOfMobileCase").value = caseItem;
 
-      var cprice = document.getElementById("mobileCasePrice").innerText;
-      var caseItemPrice = parseFloat(cprice);
-      var totalCasePrice = caseItem * caseItemPrice;
-      document.getElementById("mobileCasePrice").innerText = totalCasePrice;
-      subTotal();
-      Tax();
-      Total();
+      // subTotal();
+      // Tax();
+      // Total();
+
+   })
+
+   var minusRemoveMobileCaseBtn = document.getElementById("removeMobileCase");
+   minusRemoveMobileCaseBtn.addEventListener("click", function () {
+
+      removeItem("numberOfMobileCase", "mobileCasePrice");
+
 
    })
 
 
-   function subTotal(){
+
+   function addItem(id, total) {
+
+      var item = document.getElementById(id).value;
+      item++;
+      document.getElementById(id).value = item;
+      var totalPrice = calculate(id, item);
+      document.getElementById(total).innerText = totalPrice;
+      Total();
+      subTotal();
+      Tax();
+
+   }
+
+
+   function removeItem(id, total) {
+      var item = document.getElementById(id).value;
+      if (item > 0) {
+         item--;
+         document.getElementById(id).value = item;
+         var totalPrice = calculate(id, item);
+         document.getElementById(total).innerText = totalPrice;
+         Total();
+         subTotal();
+         Tax();
+      }
+      else {
+         item = 0;
+         document.getElementById(id).value = item;
+         var totalPrice = calculate(id, item);
+         document.getElementById(total).innerText = totalPrice;
+         Total();
+         subTotal();
+         Tax();
+      }
+   }
+
+   function calculate(id, item) {
+      if (id == "numberOfMobile") {
+         var totalPrice = item * 1219;
+         return totalPrice;
+      }
+      if (id == "numberOfMobileCase") {
+         var totalPrice = item * 59;
+         return totalPrice;
+      }
+   }
+
+
+   function subTotal() {
 
       var SubTotalMobilePrice = document.getElementById("mobilePrice").innerText;
       var SubTotalMobileCasePrice = document.getElementById("mobileCasePrice").innerText;
 
-      var SubtotalBalance = parseFloat(SubTotalMobilePrice)  + parseFloat(SubTotalMobileCasePrice);
+      var SubtotalBalance = parseFloat(SubTotalMobilePrice) + parseFloat(SubTotalMobileCasePrice);
       document.getElementById("subtotal").innerText = SubtotalBalance;
 
 
-   
+
    }
 
-   function Tax(){
+   function Tax() {
 
 
-   
+
       var SubTotalMobilePrice = document.getElementById("mobilePrice").innerText;
       var SubTotalMobileCasePrice = document.getElementById("mobileCasePrice").innerText;
 
-      var tax = parseFloat(SubTotalMobilePrice)  + parseFloat(SubTotalMobileCasePrice) -  parseFloat(SubTotalMobilePrice)  + parseFloat(SubTotalMobileCasePrice) *.15;
+      var tax = parseFloat(SubTotalMobilePrice) + parseFloat(SubTotalMobileCasePrice) - parseFloat(SubTotalMobilePrice) + parseFloat(SubTotalMobileCasePrice) * .15;
       document.getElementById("addtax").innerText = tax;
 
-      
+
 
 
 
    }
 
-   function Total(){
+   function Total() {
 
 
       var SubTotalMobilePrice = document.getElementById("mobilePrice").innerText;
       var SubTotalMobileCasePrice = document.getElementById("mobileCasePrice").innerText;
 
-      var tax = parseFloat(SubTotalMobilePrice)  + parseFloat(SubTotalMobileCasePrice) -  parseFloat(SubTotalMobilePrice)  + parseFloat(SubTotalMobileCasePrice) *.15;
-      var totalbalance = parseFloat(SubTotalMobilePrice)  + parseFloat(SubTotalMobileCasePrice) + tax;
+      var tax = parseFloat(SubTotalMobilePrice) + parseFloat(SubTotalMobileCasePrice) - parseFloat(SubTotalMobilePrice) + parseFloat(SubTotalMobileCasePrice) * .15;
+
+      var totalbalance = parseFloat(SubTotalMobilePrice) + parseFloat(SubTotalMobileCasePrice) + tax;
       document.getElementById("total").innerText = totalbalance;
       console.log(totalbalance);
 
