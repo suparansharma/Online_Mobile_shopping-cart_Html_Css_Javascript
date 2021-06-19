@@ -25,7 +25,7 @@
 
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button class="btn btn-default" id="subtracMobile"><i class="fas fa-minus"></i></button>
+                           <button class="btn btn-default" id="removeMobile"><i class="fas fa-minus"></i></button>
                            <input type="text" class="form-control text-center" id="numberOfMobile" value="1">
                            <button class="btn btn-default" id="addMobile"><i class="fas fa-plus"></i></button>
                         </div>
@@ -59,14 +59,14 @@
 
                      <div class="col-md-8">
                         <h5>Subtotal: </h5>
-                        <h5>Tax:</h5>
+                        <h5>15% Tax:</h5>
                         <h5>Total:</h5>
                      </div>
 
                      <div class="col-md-4 status">
                         <h5>$ <span id="subtotal" >1,278</span></h5>
-                        <h5><span id="addtax" >0</span></h5>
-                        <h5>$1,278</h5>
+                        <h5><span id="addtax">0</span></h5>
+                        <h5><span id="total">0</span></h5>
                      </div>
                   </div>
                </div>
@@ -116,6 +116,7 @@
 
       subTotal();
       Tax();
+      Total();
 
    })
 
@@ -123,16 +124,23 @@
 
 
 
-   var minussubtracMobileBtn = document.getElementById("subtracMobile");
+   var minussubtracMobileBtn = document.getElementById("removeMobile");
    minussubtracMobileBtn.addEventListener("click", function () {
 
 
 
-      var item = document.getElementById("numberOfMobile").value;
-      item--;
-      document.getElementById("numberOfMobile").value = item;
+      var mobileItem = document.getElementById("numberOfMobile").value;
+      mobileItem--;
+      document.getElementById("numberOfMobile").value = mobileItem;
 
-      totalMobilePrice = totalMobilePrice - 1219;
+      var mPrice = document.getElementById("mobilePrice").innerText;
+      var MobileItemPrice = parseFloat(mPrice);
+      var totalMobilePrice = mobileItem * MobileItemPrice;
+      document.getElementById("mobilePrice").innerText = totalMobilePrice;
+
+      subTotal();
+      Tax();
+      Total();
 
 
    })
@@ -157,6 +165,7 @@
       document.getElementById("mobileCasePrice").innerText = totalCasePrice;
       subTotal();
       Tax();
+      Total();
 
    })
 
@@ -183,6 +192,22 @@
       var tax = parseFloat(SubTotalMobilePrice)  + parseFloat(SubTotalMobileCasePrice) -  parseFloat(SubTotalMobilePrice)  + parseFloat(SubTotalMobileCasePrice) *.15;
       document.getElementById("addtax").innerText = tax;
 
+      
+
+
+
+   }
+
+   function Total(){
+
+
+      var SubTotalMobilePrice = document.getElementById("mobilePrice").innerText;
+      var SubTotalMobileCasePrice = document.getElementById("mobileCasePrice").innerText;
+
+      var tax = parseFloat(SubTotalMobilePrice)  + parseFloat(SubTotalMobileCasePrice) -  parseFloat(SubTotalMobilePrice)  + parseFloat(SubTotalMobileCasePrice) *.15;
+      var totalbalance = parseFloat(SubTotalMobilePrice)  + parseFloat(SubTotalMobileCasePrice) + tax;
+      document.getElementById("total").innerText = totalbalance;
+      console.log(totalbalance);
 
 
    }
